@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rachita Khuntia — APM & Growth Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F4EE;
+    --white: #FFFFFF;
+    --ink: #18181B;
+    --ink-soft: #52525B;
+    --ink-faint: #A1A1AA;
+    --line: #E4E4E7;
+    --line-dark: #D4D4D8;
+    --accent: #18181B;
+    --serif: 'Instrument Serif', serif;
+    --sans: 'Inter', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--cream); color: var(--ink); font-family: var(--sans); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 28px; }
+  ::selection { background: var(--ink); color: var(--cream); }
+
+  /* NAV */
+  nav { position: sticky; top: 0; z-index: 50; background: rgba(247,244,238,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .mark { font-family: var(--serif); font-size: 18px; letter-spacing: -0.01em; }
+  .navlinks { display: flex; gap: 28px; font-size: 14px; font-weight: 500; color: var(--ink-soft); }
+  .navlinks a:hover { color: var(--ink); }
+  .nav-cta { font-size: 13.5px; font-weight: 600; padding: 10px 20px; background: var(--ink); color: var(--cream); border-radius: 30px; transition: opacity .15s; }
+  .nav-cta:hover { opacity: 0.82; }
+  @media(max-width:720px) { .navlinks { display: none; } }
+
+  /* HERO */
+  header.hero { padding: 80px 0 72px; border-bottom: 1px solid var(--line); }
+  .hero-inner { display: grid; grid-template-columns: 1fr 380px; gap: 56px; align-items: center; }
+  .hero-tag { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 12px; font-weight: 500; padding: 6px 14px; border: 1px solid var(--line-dark); border-radius: 30px; margin-bottom: 32px; color: var(--ink-soft); }
+  .hero-tag .dot { width: 6px; height: 6px; border-radius: 50%; background: #22C55E; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+  h1.title { font-family: var(--serif); font-size: clamp(38px, 5.2vw, 62px); line-height: 1.06; letter-spacing: -0.02em; font-weight: 400; margin-bottom: 24px; }
+  h1.title em { font-style: italic; }
+  .hero-sub { font-size: 16.5px; color: var(--ink-soft); line-height: 1.75; margin-bottom: 36px; }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+  .hero-photo-wrap { position: relative; }
+  .hero-photo { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 20px; display: block; background: var(--line); }
+  .hero-photo-badge { position: absolute; bottom: 18px; left: -18px; background: var(--white); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+  .hero-photo-badge .badge-label { font-family: var(--mono); font-size: 10.5px; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 3px; }
+  .hero-photo-badge .badge-val { font-size: 13px; font-weight: 700; }
+  @media(max-width:820px) { .hero-inner { grid-template-columns: 1fr; } .hero-photo-wrap { max-width: 320px; } .hero-photo-badge { left: 12px; } }
+  .btn { font-size: 14.5px; font-weight: 600; padding: 13px 24px; border-radius: 30px; display: inline-flex; align-items: center; gap: 8px; transition: all .15s; cursor: pointer; }
+  .btn-dark { background: var(--ink); color: var(--cream); }
+  .btn-dark:hover { opacity: 0.82; transform: translateY(-1px); }
+  .btn-outline { border: 1px solid var(--line-dark); }
+  .btn-outline:hover { border-color: var(--ink); transform: translateY(-1px); }
+
+  /* TICKER */
+  .ticker { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 18px 0; overflow: hidden; position: relative; background: var(--white); }
+  .ticker::before, .ticker::after { content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2; }
+  .ticker::before { left: 0; background: linear-gradient(90deg, var(--white), transparent); }
+  .ticker::after { right: 0; background: linear-gradient(270deg, var(--white), transparent); }
+  .ticker-track { display: flex; gap: 48px; white-space: nowrap; animation: scroll 28s linear infinite; width: max-content; }
+  .ticker:hover .ticker-track { animation-play-state: paused; }
+  @keyframes scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+  .tick { font-family: var(--mono); font-size: 12.5px; color: var(--ink-faint); display: inline-flex; align-items: center; gap: 8px; }
+  .tick b { color: var(--ink); font-weight: 600; }
+  .tick-sep { color: var(--line-dark); }
+
+  /* SECTION COMMONS */
+  section { padding: 88px 0; border-bottom: 1px solid var(--line); }
+  .section-label { font-family: var(--mono); font-size: 12px; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; }
+  h2.h { font-family: var(--serif); font-size: clamp(30px, 4vw, 46px); line-height: 1.1; font-weight: 400; letter-spacing: -0.015em; margin-bottom: 10px; }
+  h2.h em { font-style: italic; }
+  .section-lede { font-size: 16px; color: var(--ink-soft); max-width: 520px; margin-bottom: 52px; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: 60px; align-items: start; }
+  .about-text p { font-size: 16px; color: var(--ink-soft); margin-bottom: 20px; line-height: 1.8; max-width: 52ch; }
+  .about-text p strong { color: var(--ink); font-weight: 600; }
+  .about-text p:last-child { margin-bottom: 0; }
+  .about-facts { border-top: 1px solid var(--line); }
+  .fact-row { display: flex; justify-content: space-between; align-items: baseline; padding: 16px 0; border-bottom: 1px solid var(--line); gap: 16px; }
+  .fact-key { font-size: 13px; color: var(--ink-faint); }
+  .fact-val { font-size: 14px; font-weight: 600; text-align: right; }
+  @media(max-width:760px) { .about-grid { grid-template-columns: 1fr; } }
+
+  /* CAPABILITIES */
+  .cap-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .cap-card { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 28px; transition: border-color .2s, transform .2s; }
+  .cap-card:hover { border-color: var(--ink); transform: translateY(-3px); }
+  .cap-icon { font-size: 22px; margin-bottom: 16px; }
+  .cap-title { font-size: 16px; font-weight: 700; margin-bottom: 10px; }
+  .cap-desc { font-size: 14px; color: var(--ink-soft); line-height: 1.7; }
+  @media(max-width:680px) { .cap-grid { grid-template-columns: 1fr; } }
+
+  /* EXPERIENCE */
+  .role-card { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 28px 30px; margin-bottom: 16px; }
+  .role-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 18px; flex-wrap: wrap; }
+  .role-company { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-faint); margin-bottom: 4px; }
+  .role-title { font-size: 18px; font-weight: 700; }
+  .role-time { font-family: var(--mono); font-size: 12px; color: var(--ink-faint); white-space: nowrap; padding: 5px 12px; border: 1px solid var(--line); border-radius: 20px; }
+  .role-bullets { display: flex; flex-direction: column; gap: 11px; }
+  .role-bullets li { list-style: none; font-size: 14.5px; color: var(--ink-soft); line-height: 1.65; padding-left: 18px; position: relative; }
+  .role-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--ink-faint); font-size: 13px; }
+  .role-bullets strong { color: var(--ink); font-weight: 600; }
+
+  /* WORKS / ACCORDION */
+  .works-list { display: flex; flex-direction: column; }
+  .work-item { border-top: 1px solid var(--line); }
+  .work-item:last-child { border-bottom: 1px solid var(--line); }
+  .work-header { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; cursor: pointer; gap: 20px; }
+  .work-header:hover .work-plus { border-color: var(--ink); }
+  .work-left { display: flex; align-items: center; gap: 20px; }
+  .work-num { font-family: var(--mono); font-size: 12px; color: var(--ink-faint); width: 28px; flex-shrink: 0; }
+  .work-name { font-size: 17px; font-weight: 600; }
+  .work-right { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
+  .work-co { font-size: 12.5px; color: var(--ink-faint); }
+  .work-plus { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--line-dark); display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--ink-soft); transition: all .2s; flex-shrink: 0; }
+  .work-body { display: none; padding: 0 0 28px 48px; }
+  .work-body.open { display: block; }
+  .work-body p { font-size: 15px; color: var(--ink-soft); line-height: 1.75; max-width: 64ch; margin-bottom: 16px; }
+  .work-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .work-tag { font-size: 12px; font-weight: 600; padding: 5px 12px; border: 1px solid var(--line-dark); border-radius: 20px; color: var(--ink-soft); }
+  .work-placeholder { text-align: center; padding: 52px 28px; border: 1.5px dashed var(--line-dark); border-radius: 16px; color: var(--ink-faint); }
+  .work-placeholder .wp-title { font-size: 16px; font-weight: 600; color: var(--ink-soft); margin-bottom: 8px; }
+  .work-placeholder .wp-sub { font-size: 14px; line-height: 1.6; }
+
+  /* SKILLS */
+  .skill-section { margin-bottom: 36px; }
+  .skill-section-title { font-family: var(--mono); font-size: 12px; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 16px; }
+  .skill-marquee { overflow: hidden; position: relative; mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); }
+  .skill-track { display: flex; gap: 12px; width: max-content; animation: skillscroll 22s linear infinite; }
+  .skill-track.rev { animation-direction: reverse; animation-duration: 26s; }
+  .skill-marquee:hover .skill-track { animation-play-state: paused; }
+  @keyframes skillscroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+  .skill-tile { display: flex; align-items: center; gap: 9px; padding: 10px 16px; background: var(--white); border: 1px solid var(--line); border-radius: 30px; white-space: nowrap; flex-shrink: 0; font-size: 13.5px; font-weight: 500; transition: border-color .2s, transform .15s; }
+  .skill-tile:hover { border-color: var(--ink); transform: translateY(-2px); }
+  .skill-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+  /* FAQ */
+  .faq-list { display: flex; flex-direction: column; }
+  .faq-item { border-top: 1px solid var(--line); }
+  .faq-item:last-child { border-bottom: 1px solid var(--line); }
+  .faq-q { display: flex; justify-content: space-between; align-items: center; padding: 22px 0; cursor: pointer; gap: 16px; font-size: 16px; font-weight: 600; }
+  .faq-plus { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--line-dark); display: flex; align-items: center; justify-content: center; font-size: 18px; transition: all .2s; flex-shrink: 0; color: var(--ink-soft); }
+  .faq-item.open .faq-plus { transform: rotate(45deg); border-color: var(--ink); }
+  .faq-a { display: none; padding: 0 40px 22px 0; font-size: 15px; color: var(--ink-soft); line-height: 1.8; max-width: 68ch; }
+  .faq-item.open .faq-a { display: block; }
+
+  /* FOOTER */
+  footer { padding: 88px 0 48px; }
+  footer h2 { font-family: var(--serif); font-size: clamp(32px, 5vw, 58px); font-weight: 400; letter-spacing: -0.02em; max-width: 720px; line-height: 1.1; margin-bottom: 36px; }
+  footer h2 em { font-style: italic; }
+  .contact-row { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 64px; }
+  .foot-bottom { display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--ink-faint); border-top: 1px solid var(--line); padding-top: 24px; flex-wrap: wrap; gap: 10px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="mark">Rachita Khuntia</div>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#capabilities">Capabilities</a>
+      <a href="#experience">Experience</a>
+      <a href="#works">Works</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Connect</a>
+    </div>
+    <a class="nav-cta" href="#contact">Let's connect</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-tag"><span class="dot"></span>Open to APM & Growth · Strategy roles</div>
+        <h1 class="title">I turn research, data, and strategy into <em>products that move.</em></h1>
+        <p class="hero-sub">From 400% traffic growth at Housing.com to commercial insights for global healthcare clients at L.E.K. — I work where strategy meets execution, and where user insight becomes a roadmap.</p>
+        <div class="hero-actions">
+          <a class="btn btn-dark" href="#works">See my work</a>
+          <a class="btn btn-outline" id="resumeBtn" href="assets/resume.pdf" target="_blank">Download resume</a>
+          <a class="btn btn-outline" href="#contact">Get in touch</a>
+        </div>
+      </div>
+      <div class="hero-photo-wrap">
+        <img id="avatar" class="hero-photo" src="assets/photo.jpg" alt="Rachita Khuntia">
+        <div class="hero-photo-badge">
+          <div class="badge-label">Currently at</div>
+          <div class="badge-val">L.E.K. Capability Network</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="tick"><b>400%</b> traffic growth <span class="tick-sep">·</span></span>
+    <span class="tick"><b>1pp CVR uplift</b> + 100% rollout <span class="tick-sep">·</span></span>
+    <span class="tick"><b>15+ proposals</b> for MD-level stakeholders <span class="tick-sep">·</span></span>
+    <span class="tick"><b>10+ industries</b> analyzed at L.E.K. <span class="tick-sep">·</span></span>
+    <span class="tick"><b>0→1</b> payment flow revamp <span class="tick-sep">·</span></span>
+    <span class="tick"><b>400+ delegates</b> managed at NSUTMUN <span class="tick-sep">·</span></span>
+    <span class="tick"><b>400%</b> traffic growth <span class="tick-sep">·</span></span>
+    <span class="tick"><b>1pp CVR uplift</b> + 100% rollout <span class="tick-sep">·</span></span>
+    <span class="tick"><b>15+ proposals</b> for MD-level stakeholders <span class="tick-sep">·</span></span>
+    <span class="tick"><b>10+ industries</b> analyzed at L.E.K. <span class="tick-sep">·</span></span>
+    <span class="tick"><b>0→1</b> payment flow revamp <span class="tick-sep">·</span></span>
+    <span class="tick"><b>400+ delegates</b> managed at NSUTMUN <span class="tick-sep">·</span></span>
+  </div>
+</div>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-label">About</div>
+    <h2 class="h">Research brain, <em>product instinct.</em></h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I studied <strong>Biotechnology Engineering at NSUT Delhi</strong>, but what really pulled me in was the intersection of user behavior, data, and decision-making — the parts of any problem that require genuine curiosity to untangle.</p>
+        <p>At <strong>Housing.com</strong>, I worked across growth and product — SEO-driven traffic growth, behavioral data experiments, and a full 0→1 revamp of the payment flow. At <strong>L.E.K. Capability Network</strong>, I now help global strategy teams turn messy market data into crisp commercial recommendations for clients like Sanofi and J&J.</p>
+        <p>I'm looking for my next role in <strong>APM or growth & strategy</strong> — where I can bring both the analytical sharpness and the user empathy to ship things that actually work.</p>
+      </div>
+      <div class="about-facts">
+        <div class="fact-row"><span class="fact-key">Currently at</span><span class="fact-val">L.E.K. Capability Network</span></div>
+        <div class="fact-row"><span class="fact-key">Based in</span><span class="fact-val">Gurugram, India</span></div>
+        <div class="fact-row"><span class="fact-key">Education</span><span class="fact-val">B.Tech Biotech, NSUT Delhi</span></div>
+        <div class="fact-row"><span class="fact-key">Background</span><span class="fact-val">Product + Strategy + Consulting</span></div>
+        <div class="fact-row"><span class="fact-key">Target roles</span><span class="fact-val">APM · Growth · Strategy</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="capabilities">
+  <div class="wrap">
+    <div class="section-label">Capabilities</div>
+    <h2 class="h">Where I'm <em>most useful.</em></h2>
+    <p class="section-lede">Most of my work falls into a few patterns. If you see your problem in one of these, let's talk.</p>
+    <div class="cap-grid">
+      <div class="cap-card">
+        <div class="cap-icon">📈</div>
+        <div class="cap-title">Growth & conversion</div>
+        <p class="cap-desc">I've driven measurable traffic and conversion outcomes through SEO, behavioral data experiments, and funnel redesigns. I know how to find the lever, run the test, and own the rollout.</p>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon">🔍</div>
+        <div class="cap-title">Research & user insight</div>
+        <p class="cap-desc">At Housing.com, I led user research with power users and shaped feature direction from it. At L.E.K., I cross-validate across 10+ source types to build commercial hypotheses that hold up to scrutiny.</p>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon">🗺️</div>
+        <div class="cap-title">Strategy & market intelligence</div>
+        <p class="cap-desc">Revenue models, competitive benchmarks, and market sizing across healthcare, life sciences, and consumer. I've structured research for MD-level stakeholders at global consulting engagements.</p>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon">🛠️</div>
+        <div class="cap-title">0→1 product execution</div>
+        <p class="cap-desc">I've shipped a full payment flow revamp, a new web platform, and a user modal feature from discovery to GTM. I work closely with design, engineering, and business teams to get things actually built.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-label">Experience</div>
+    <h2 class="h">Where I've <em>shipped.</em></h2>
+    <p class="section-lede">Three roles across consulting, product, and project management — different domains, same instinct to move things forward with clarity.</p>
+
+    <div class="role-card">
+      <div class="role-head">
+        <div>
+          <div class="role-company">L.E.K. Capability Network</div>
+          <div class="role-title">Analyst 1</div>
+        </div>
+        <div class="role-time">Jul 2025 – Present</div>
+      </div>
+      <ul class="role-bullets">
+        <li>Surfaced demand trends and commercial insights for global strategy projects by cross-validating <strong>10+ source types</strong> across 5+ geographies — analyst reports, FDA labels, CapIQ, Orbis, and government publications.</li>
+        <li>Translated competitive benchmarks across <strong>10+ industry players</strong> into pricing and positioning recommendations for senior client teams.</li>
+        <li>Built revenue models and commercial assumption frameworks covering pricing, launch timing, and market sizing — enabling senior consultants to pressure-test GTM strategies across healthcare and life sciences.</li>
+        <li>Built and enriched contact databases of <strong>100+ doctors and domain experts</strong> for targeted expert outreach.</li>
+        <li>Developed <strong>15+ proposals for MDs</strong>, structuring research findings into client-ready deliverables for Sanofi, J&J, and other global clients.</li>
+      </ul>
+    </div>
+
+    <div class="role-card">
+      <div class="role-head">
+        <div>
+          <div class="role-company">REA India · Housing.com</div>
+          <div class="role-title">Product Management Intern</div>
+        </div>
+        <div class="role-time">Dec 2024 – Jun 2025</div>
+      </div>
+      <ul class="role-bullets">
+        <li>Revamped and launched the <strong>Pay On Credit</strong> web platform, driving a <strong>400% increase in traffic</strong> through SEO optimization and keyword refinement.</li>
+        <li>Enhanced the user modal feature through behavioral data insights, driving a <strong>1pp CVR uplift</strong> followed by 100% rollout and GTM execution.</li>
+        <li>Led end-to-end user research with power users to gather insights on new feature prototypes and refine product direction.</li>
+        <li>Led the <strong>0→1 revamp of the payment flow</strong>, collaborating with design, business, and engineering to improve conversion, compliance, and reliability.</li>
+      </ul>
+    </div>
+
+    <div class="role-card">
+      <div class="role-head">
+        <div>
+          <div class="role-company">Tata 1mg</div>
+          <div class="role-title">Project Management Intern</div>
+        </div>
+        <div class="role-time">Jun 2024 – Aug 2024</div>
+      </div>
+      <ul class="role-bullets">
+        <li>Collaborated cross-functionally to analyze and develop engagement strategies for the <strong>Weight Management Program</strong>, benefiting 100+ users.</li>
+        <li>Conducted in-depth market research and competitor analysis to identify emerging trends in WMP.</li>
+        <li>Developed <strong>10+ detailed project manuals</strong> streamlining the doctor's onboarding workflow.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="works">
+  <div class="wrap">
+    <div class="section-label">Selected works</div>
+    <h2 class="h">What this looks like <em>in practice.</em></h2>
+    <p class="section-lede">A breakdown of the problems I've worked on, the approach I took, and what moved as a result.</p>
+
+    <div class="works-list">
+      <div class="work-item">
+        <div class="work-header" onclick="toggleWork(this)">
+          <div class="work-left">
+            <span class="work-num">01</span>
+            <span class="work-name">Taking a payment platform from broken to 400% more traffic</span>
+          </div>
+          <div class="work-right">
+            <span class="work-co">Housing.com</span>
+            <div class="work-plus">+</div>
+          </div>
+        </div>
+        <div class="work-body">
+          <p>The Pay On Credit web platform existed but wasn't being found. Through a focused SEO audit, keyword gap analysis, and structural content revamp, I rebuilt discoverability from the ground up. The result was a 400% increase in organic traffic — not from paid spend, but from fixing how the platform talked about itself to search engines and users alike.</p>
+          <div class="work-tags">
+            <span class="work-tag">SEO</span>
+            <span class="work-tag">Growth</span>
+            <span class="work-tag">Web platform</span>
+            <span class="work-tag">GTM</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <div class="work-header" onclick="toggleWork(this)">
+          <div class="work-left">
+            <span class="work-num">02</span>
+            <span class="work-name">A behavioral insight that became a 1pp CVR uplift</span>
+          </div>
+          <div class="work-right">
+            <span class="work-co">Housing.com</span>
+            <div class="work-plus">+</div>
+          </div>
+        </div>
+        <div class="work-body">
+          <p>The user modal was a small surface, but behavioral data told a different story. I identified a friction pattern in how users were engaging with the modal, redesigned the interaction based on the data, and coordinated the experiment to validate the fix. A 1pp CVR improvement sounds incremental — at Housing.com's traffic volumes, it wasn't. It went to 100% rollout.</p>
+          <div class="work-tags">
+            <span class="work-tag">Behavioral data</span>
+            <span class="work-tag">Experimentation</span>
+            <span class="work-tag">CVR optimization</span>
+            <span class="work-tag">Rollout</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <div class="work-header" onclick="toggleWork(this)">
+          <div class="work-left">
+            <span class="work-num">03</span>
+            <span class="work-name">Rebuilding the payment flow 0→1</span>
+          </div>
+          <div class="work-right">
+            <span class="work-co">Housing.com</span>
+            <div class="work-plus">+</div>
+          </div>
+        </div>
+        <div class="work-body">
+          <p>The payment flow needed more than patches — it needed a rethink. I led the 0→1 revamp, aligning product designers, the business team, and engineering around a flow that improved conversion, met compliance requirements, and was actually reliable. This was the kind of cross-functional coordination work that required holding the thread across multiple teams and moving decisions forward without getting stuck.</p>
+          <div class="work-tags">
+            <span class="work-tag">0→1 product</span>
+            <span class="work-tag">Payment flow</span>
+            <span class="work-tag">Cross-functional</span>
+            <span class="work-tag">Compliance</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <div class="work-header" onclick="toggleWork(this)">
+          <div class="work-left">
+            <span class="work-num">04</span>
+            <span class="work-name">Commercial strategy for global healthcare clients</span>
+          </div>
+          <div class="work-right">
+            <span class="work-co">L.E.K.</span>
+            <div class="work-plus">+</div>
+          </div>
+        </div>
+        <div class="work-body">
+          <p>At L.E.K., I've contributed to strategy engagements across healthcare and life sciences — building revenue models, pressure-testing GTM assumptions, and synthesizing competitive landscapes for clients including Sanofi and J&J. The work requires the same instinct as product: find the real question underneath the stated one, build something rigorous, and communicate it clearly to people who need to make decisions with it.</p>
+          <div class="work-tags">
+            <span class="work-tag">Commercial strategy</span>
+            <span class="work-tag">Market sizing</span>
+            <span class="work-tag">Healthcare</span>
+            <span class="work-tag">Revenue modelling</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="work-placeholder" style="margin-top:24px;">
+      <div class="wp-title">Side projects · coming soon</div>
+      <p class="wp-sub">Building something new. Will be here when it's ready.</p>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-label">Skills & tools</div>
+    <h2 class="h">The <em>toolkit.</em></h2>
+    <p class="section-lede">What I reach for across product, growth, research, and strategy work.</p>
+
+    <div class="skill-section">
+      <div class="skill-section-title">Product & growth</div>
+      <div class="skill-marquee">
+        <div class="skill-track" id="row1"></div>
+      </div>
+    </div>
+    <div class="skill-section">
+      <div class="skill-section-title">Data & analytics</div>
+      <div class="skill-marquee">
+        <div class="skill-track rev" id="row2"></div>
+      </div>
+    </div>
+    <div class="skill-section">
+      <div class="skill-section-title">Research & strategy</div>
+      <div class="skill-marquee">
+        <div class="skill-track" id="row3"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-label">FAQs</div>
+    <h2 class="h">Things people <em>usually ask.</em></h2>
+    <p class="section-lede">A few questions I tend to get from recruiters and teams, answered plainly.</p>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Why APM or growth roles specifically? <div class="faq-plus">+</div></div>
+        <div class="faq-a">I've always worked at the intersection of user insight, data, and strategy — and APM and growth roles are where those three things come together most directly. At Housing.com I saw how behavioral data experiments translate directly into conversion outcomes. At L.E.K. I saw how market intelligence shapes product bets. I want a role that uses both.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">You studied Biotechnology — why product? <div class="faq-plus">+</div></div>
+        <div class="faq-a">Engineering taught me to think in systems and constraints. What product adds is the user — and the requirement to make something that actually works for real people, not just technically. That combination is what I find genuinely interesting. My path through consulting, PM, and strategy roles wasn't accidental; it was how I found the work I want to keep doing.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What kinds of teams do you work best with? <div class="faq-plus">+</div></div>
+        <div class="faq-a">Teams that care about getting it right, not just getting it done. I do my best work when I have access to real users or data, room to structure the problem before jumping to solutions, and teammates who push back when the thinking isn't clear. I've been in fast-moving environments (Housing.com) and high-rigour environments (L.E.K.) and I've found ways to be useful in both.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Do you have side projects? <div class="faq-plus">+</div></div>
+        <div class="faq-a">Working on it. I deliberately left this section of the portfolio open — I'll add projects here as they're worth showing, not to fill space. If you're curious about what I'm exploring right now, ask me when we talk.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What's the best way to reach you? <div class="faq-plus">+</div></div>
+        <div class="faq-a">Email is the most reliable — rachitakhuntia25@gmail.com. I read everything myself and reply when there's a clear fit or something worth discussing. LinkedIn also works for a quick intro.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="section-label">Connect</div>
+    <h2>If this sounds right, <em>let's talk.</em></h2>
+    <div class="contact-row">
+      <a class="btn btn-dark" href="mailto:rachitakhuntia25@gmail.com">Email me →</a>
+      <a class="btn btn-outline" href="LINKEDIN_LINK_HERE" target="_blank">LinkedIn</a>
+      <a class="btn btn-outline" href="assets/resume.pdf" target="_blank">Download resume</a>
+    </div>
+    <div class="foot-bottom">
+      <span>Rachita Khuntia · Gurugram, India</span>
+      <span>rachitakhuntia25@gmail.com · +91 98188 21942</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   EDIT EVERYTHING HERE — photo, resume, LinkedIn.
+   Nothing else in this file needs to change.
+   ============================================================ */
+const CONFIG = {
+  photo: "assets/photo.jpg",       // drop your headshot in the assets/ folder
+  resume: "assets/resume.pdf",     // drop your resume PDF in the assets/ folder
+  linkedin: "LINKEDIN_LINK_HERE",  // paste your LinkedIn URL here
+};
+/* ============================================================
+   Nothing below this line needs editing.
+   ============================================================ */
+
+// Wire up config
+document.querySelectorAll('a[href="assets/resume.pdf"]').forEach(el => el.href = CONFIG.resume);
+document.querySelectorAll('a[href="LINKEDIN_LINK_HERE"]').forEach(el => el.href = CONFIG.linkedin);
+const avatarEl = document.getElementById('avatar');
+if (avatarEl) avatarEl.src = CONFIG.photo;
+const SKILLS = {
+  row1: [
+    ["User research","#18181B"],["A/B testing","#18181B"],["Figma","#18181B"],
+    ["MoEngage","#18181B"],["Wireframing","#18181B"],["GTM strategy","#18181B"],["SEO","#18181B"],
+    ["Funnel analysis","#18181B"],["CVR optimization","#18181B"],["Roadmapping","#18181B"]
+  ],
+  row2: [
+    ["SQL","#18181B"],["Power BI","#18181B"],["Excel","#18181B"],
+    ["Data analysis","#18181B"],["Market sizing","#18181B"],["Revenue modelling","#18181B"]
+  ],
+  row3: [
+    ["Market research","#18181B"],["Competitive intelligence","#18181B"],["Secondary research","#18181B"],
+    ["Insight generation","#18181B"],["Hypothesis development","#18181B"],["Stakeholder management","#18181B"],
+    ["Problem structuring","#18181B"]
+  ]
+};
+
+Object.entries(SKILLS).forEach(([id, items]) => {
+  const el = document.getElementById(id);
+  const colors = ['#18181B','#3F3F46','#71717A'];
+  const set = items.map(([name], i) =>
+    `<div class="skill-tile"><span class="skill-dot" style="background:${colors[i%3]}"></span>${name}</div>`
+  ).join('');
+  el.innerHTML = set + set;
+});
+
+// Accordion for works
+function toggleWork(header) {
+  const body = header.nextElementSibling;
+  const plus = header.querySelector('.work-plus');
+  const isOpen = body.classList.contains('open');
+  document.querySelectorAll('.work-body.open').forEach(b => {
+    b.classList.remove('open');
+    b.previousElementSibling.querySelector('.work-plus').style.transform = '';
+    b.previousElementSibling.querySelector('.work-plus').style.borderColor = '';
+  });
+  if (!isOpen) {
+    body.classList.add('open');
+    plus.style.transform = 'rotate(45deg)';
+    plus.style.borderColor = 'var(--ink)';
+  }
+}
+
+// FAQ accordion
+function toggleFaq(qEl) {
+  const item = qEl.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// Scrollspy
+const navLinks = document.querySelectorAll('.navlinks a');
+const secs = ['about','capabilities','experience','works','skills','contact'].map(id => document.getElementById(id));
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(l => l.style.color = '');
+      const match = document.querySelector(`.navlinks a[href="#${e.target.id}"]`);
+      if (match) match.style.color = 'var(--ink)';
+    }
+  });
+}, { rootMargin: '-40% 0px -50% 0px' });
+secs.forEach(s => s && obs.observe(s));
+</script>
+
+</body>
+</html>
